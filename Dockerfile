@@ -1,7 +1,7 @@
 FROM ubuntu:14.04
 MAINTAINER Marc Bachmann <marc@livingdocs.io>
 
-RUN apt-get update && \
+RUN apt-get update && apt-get upgrade -y && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes --no-install-recommends \
     apt-transport-https build-essential ca-certificates lsb-release python-all rlwrap \
     curl git nano \
@@ -11,8 +11,7 @@ RUN apt-get update && \
     devscripts debhelper fakeroot \
 
     # cleanup
-    && apt-get autoremove -y && \
-    apt-get clean && \
+    && apt-get autoremove -y && apt-get clean && \
     rm -Rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV NVM_SYMLINK_CURRENT true
